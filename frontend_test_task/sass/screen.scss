@@ -5,3 +5,197 @@
 
 @import "compass/reset";
 
+// MIXINS
+@mixin transition_all($time) {
+  -webkit-transition: all $time;
+     -moz-transition: all $time;
+      -ms-transition: all $time;
+       -o-transition: all $time;
+          transition: all $time;
+}
+@mixin border_radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin add_font($font_name) {
+  @font-face {
+    font-family: $font_name;
+    src: unquote( 'url(../fonts/' + $font_name + '/' + $font_name + '.eot)' );
+    src: unquote( 'url(../fonts/' + $font_name + '/' + $font_name + '.otf)' );
+    src: unquote( 'url(../fonts/' + $font_name + '/' + $font_name + '.woff)' );
+  }
+}
+// FONTS
+@include add_font(Roboto-Light);
+@include add_font(Roboto-Regular);
+
+
+// MAIN CSS
+a {
+  text-decoration: none;
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+  }
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  font-family: Roboto-Light;
+  font-size: 16px;
+  background-color: #2F3032;
+  min-height: 100%;
+  padding-bottom: 100px;
+}
+
+.navbar-inverse.top_menu {
+  background-color: #212223;
+  border: none;
+  @include border_radius(0);
+}
+
+.top_menu {
+  min-height: 36px;
+  margin-bottom: 0;
+}
+
+.top_menu .top_menu__items {
+  width: 100%;
+}
+
+.top_menu .top_menu__items li {
+  float: left;
+  text-align: center;
+}
+/* one item */
+.top_menu .top_menu__items li:first-child:nth-last-child(1) {
+  width: 100%;
+}
+/* two items */
+.top_menu .top_menu__items li:first-child:nth-last-child(2),
+.top_menu .top_menu__items li:first-child:nth-last-child(2) ~ li {
+  width: 50%;
+}
+/* three items */
+.top_menu .top_menu__items li:first-child:nth-last-child(3),
+.top_menu .top_menu__items li:first-child:nth-last-child(3) ~ li {
+  width: 33.3333%;
+}
+/* four items */
+.top_menu .top_menu__items li:first-child:nth-last-child(4),
+.top_menu .top_menu__items li:first-child:nth-last-child(4) ~ li {
+  width: 25%;
+}
+@media (max-width: 768px) {
+  .top_menu .top_menu__items li {
+    width: 100% !important;
+    text-align: left;
+  }
+}
+
+.top_menu .top_menu__items li a {
+  padding: 0;
+  line-height: 36px;
+  color: #ffffff;
+  font-family: Roboto-Regular;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 36px;
+  text-transform: uppercase;
+  @include transition_all(0.25s);
+  &:hover { color: #9d9d9d; }
+}
+@media (max-width: 768px) {
+  .top_menu .top_menu__items li a {
+    padding-left: 15px;
+  }
+}
+
+.top_menu .top_menu__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer {
+  height: 100px;
+  width: 100%;
+  background-color: #212223;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .footer {
+    height: auto;
+    padding: 20px 15px;
+    position: relative;
+    margin-bottom: -100px;
+  }
+}
+
+.footer .footer_menu__item {
+  position: relative;
+  display: inline-block;
+  line-height: 100px;
+  font-size: 14px;
+  font-weight: 300;
+  text-transform: uppercase;
+  a {
+    color: #ffffff;
+    @include transition_all(0.25s);
+    &:hover {
+      text-decoration: none;
+      color: #9d9d9d;
+    }
+  }
+  + .footer_menu__item {
+    margin-left: 34px;
+    &:before {
+      content: "|";
+      color: #ffffff;
+      position: absolute;
+      left: -20px;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .footer .footer_menu__item {
+    display: block;
+    line-height: 14px;
+  + .footer_menu__item {
+      margin-left: 0;
+      margin-top: 15px;
+      &:before {
+        content: "";
+      }
+    }
+  }
+}
+
+.opportunities {
+  max-width: 1200px;
+  min-height: 300px;
+  padding: 75px 90px 69px 90px;
+  margin: 0 auto;
+  background: url(../img/bg-img.png) center/cover no-repeat;
+  .opportunities__item {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 100;
+    line-height: 18px;
+    margin-bottom: 7px;
+    padding-top: 10px;
+    min-height: 47px;
+    padding-left: 50px;
+    &.first { background: url(../img/opportunities-1.png) 0 0 no-repeat; }
+    &.second { background: url(../img/opportunities-2.png) 0 0 no-repeat; }
+    &.third { background: url(../img/opportunities-3.png) 0 0 no-repeat; }
+  }
+}
